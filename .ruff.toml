@@ -3,4 +3,4 @@ extend = ".github/linters/.ruff.toml"
 target-version = "py312"
 
 [lint]
-extend-ignore = ["F722", "N806", "UP037"]
+extend-ignore = ["F722", "FBT003", "N806", "UP037"]

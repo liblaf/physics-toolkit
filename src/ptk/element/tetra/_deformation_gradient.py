@@ -12,7 +12,7 @@ def deformation_gradient(
     """Compute the deformation gradient tensor for a tetrahedral element.
 
     References:
-        - https://en.wikipedia.org/wiki/Finite_strain_theory
+        - https://en.wikipedia.org/wiki/Finite_strain_theory#Deformation_gradient_tensor
     """
     grad: Float[jax.Array, "3 3"] = grad_op @ disp
     F: Float[jax.Array, "3 3"] = jnp.eye(3) + grad

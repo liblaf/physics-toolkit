@@ -14,6 +14,4 @@ def test_grad_op() -> None:
     grad_op: Float[jax.Array, "3 4"] = ptk.element.tetra.grad_op(points)
     grad: Float[jax.Array, "3 3"] = grad_op @ f
     for i, j in itertools.combinations(range(4), 2):
-        np.testing.assert_allclose(
-            grad @ (points[i] - points[j]), f[i] - f[j], rtol=1e-5
-        )
+        np.testing.assert_allclose(grad @ (points[i] - points[j]), f[i] - f[j])

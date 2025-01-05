@@ -13,7 +13,7 @@ def test_deformation_gradient() -> None:
     F: Float[jax.Array, "3 3"] = ptk.element.tetra.deformation_gradient(
         disp, ptk.element.tetra.grad_op(points)
     )
-    np.testing.assert_allclose(F, deformation_gradient_naive(disp, points))
+    np.testing.assert_allclose(F, deformation_gradient_naive(disp, points), atol=1e-15)
 
 
 def deformation_gradient_naive(

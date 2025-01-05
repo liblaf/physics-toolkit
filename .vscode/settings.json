@@ -1,12 +1,16 @@
 {
   "files.exclude": {
     "**/__pycache__": true,
+    "**/.cache": true,
     "**/.pixi": true,
     "**/.pytest_cache": true,
     "**/.ruff_cache": true,
     "**/.venv": true
   },
   "python.analysis.diagnosticMode": "workspace",
+  "python.testing.pytestArgs": ["tests"],
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
   "yaml.customTags": [
     "!ENV scalar",
     "!ENV sequence",
