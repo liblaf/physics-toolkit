@@ -28,11 +28,11 @@ authors = [
   { email = "30631553+liblaf@users.noreply.github.com", name = "liblaf" },
 ]
 dependencies = [
-  "jaxtyping>=0.2.36,<0.3",
-  "lazy-loader>=0.4,<0.5",
-  "numpy",
-  "pyvista>=0.44.2,<0.45",
-  "scipy",
+  "jaxtyping~=0.2.36",
+  "lazy-loader~=0.4",
+  "numpy~=2.2.1",
+  "pyvista~=0.44.2",
+  "scipy~=1.15.0",
 ]
 description = "Add your description here"
 keywords = []
@@ -56,8 +56,8 @@ packages = ["src/fem"]
 allow-direct-references = true
 
 [tool.pixi.dependencies]
-jax = ">=0.4.35,<0.5"
-jaxlib = { build = "*cuda*", version = ">=0.4.35,<0.5" }
+jax = { version = "~=0.4.35" }
+jaxlib = { build = "*cuda*" }
 
 [tool.pixi.environments]
 default = { features = ["dev", "docs", "test"] }
