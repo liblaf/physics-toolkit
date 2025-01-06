@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
 
-site_name: Physics Toolkit
-site_url: https://liblaf.github.io/physics-toolkit/
-repo_name: liblaf/physics-toolkit
-repo_url: https://github.com/liblaf/physics-toolkit
+site_name: FEM
+site_url: https://liblaf.github.io/fem/
+repo_name: liblaf/fem
+repo_url: https://github.com/liblaf/fem
 site_author: liblaf
 edit_uri: edit/main/docs/
 
@@ -65,7 +65,7 @@ plugins:
         - scripts/docs/gen-ref-pages.py
   - git-committers:
       enabled: !ENV [CI, false]
-      repository: liblaf/physics-toolkit
+      repository: liblaf/fem
       branch: main
   - literate-nav
   - section-index
@@ -112,4 +112,4 @@ markdown_extensions:
 watch:
   - docs/
   - scripts/docs/gen-ref-pages.py
-  - src/ptk/
+  - src/fem/

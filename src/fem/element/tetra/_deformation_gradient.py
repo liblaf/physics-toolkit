@@ -2,10 +2,10 @@ import jax
 import jax.numpy as jnp
 from jaxtyping import Float
 
-import ptk.utils
+import fem.utils
 
 
-@ptk.utils.jit()
+@fem.utils.jit()
 def deformation_gradient(
     disp: Float[jax.Array, "4 3"], grad_op: Float[jax.Array, "3 4"]
 ) -> Float[jax.Array, "3 3"]:

@@ -3,15 +3,15 @@ import jax.numpy as jnp
 import numpy as np
 from jaxtyping import Float, PRNGKeyArray
 
-import ptk.element.tetra
+import fem.element.tetra
 
 
 def test_deformation_gradient() -> None:
     rng: PRNGKeyArray = jax.random.key(0)
     points: Float[jax.Array, "4 3"] = jax.random.uniform(rng, (4, 3))
     disp: Float[jax.Array, "4 3"] = jax.random.uniform(rng, (4, 3))
-    F: Float[jax.Array, "3 3"] = ptk.element.tetra.deformation_gradient(
-        disp, ptk.element.tetra.grad_op(points)
+    F: Float[jax.Array, "3 3"] = fem.element.tetra.deformation_gradient(
+        disp, fem.element.tetra.grad_op(points)
     )
     np.testing.assert_allclose(F, deformation_gradient_naive(disp, points), atol=1e-15)
 

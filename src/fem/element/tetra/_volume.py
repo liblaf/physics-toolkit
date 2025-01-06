@@ -2,10 +2,10 @@ import jax
 import jax.numpy as jnp
 from jaxtyping import Float
 
-import ptk.utils
+import fem.utils
 
 
-@ptk.utils.jit()
+@fem.utils.jit()
 def volume(points: Float[jax.Array, "4 3"]) -> Float[jax.Array, ""]:
     """Compute the volume of a tetrahedral element.
 

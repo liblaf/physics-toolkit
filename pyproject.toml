@@ -28,36 +28,36 @@ authors = [
   { email = "30631553+liblaf@users.noreply.github.com", name = "liblaf" },
 ]
 dependencies = [
-  "jaxtyping~=0.2.36",
-  "lazy-loader~=0.4",
-  "numpy~=2.2.1",
-  "pyvista~=0.44.2",
-  "scipy~=1.15.0",
+  "jaxtyping>=0.2.36,<0.3",
+  "lazy-loader>=0.4,<0.5",
+  "numpy",
+  "pyvista>=0.44.2,<0.45",
+  "scipy",
 ]
 description = "Add your description here"
 keywords = []
 license = "MIT"
-name = "physics-toolkit"
+name = "liblaf-fem"
 readme = "README.md"
 requires-python = ">=3.12"
 version = "0.0.0"
 
 [project.urls]
-"Changelog" = "https://github.com/liblaf/physics-toolkit/blob/main/CHANGELOG.md"
-"Homepage" = "https://github.com/liblaf/physics-toolkit"
-"Issue Tracker" = "https://github.com/liblaf/physics-toolkit/issues"
-"Release Notes" = "https://github.com/liblaf/physics-toolkit/releases"
-"Source Code" = "https://github.com/liblaf/physics-toolkit"
+"Changelog" = "https://github.com/liblaf/fem/blob/main/CHANGELOG.md"
+"Homepage" = "https://github.com/liblaf/fem"
+"Issue Tracker" = "https://github.com/liblaf/fem/issues"
+"Release Notes" = "https://github.com/liblaf/fem/releases"
+"Source Code" = "https://github.com/liblaf/fem"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/ptk"]
+packages = ["src/fem"]
 
 [tool.hatch.metadata]
 allow-direct-references = true
 
 [tool.pixi.dependencies]
-jax = { version = "~=0.4.35" }
-jaxlib = { build = "*cuda*" }
+jax = ">=0.4.35,<0.5"
+jaxlib = { build = "*cuda*", version = ">=0.4.35,<0.5" }
 
 [tool.pixi.environments]
 default = { features = ["dev", "docs", "test"] }
@@ -68,7 +68,7 @@ channels = ["anaconda", "conda-forge"]
 platforms = ["linux-64"]
 
 [tool.pixi.pypi-dependencies]
-physics-toolkit = { editable = true, path = "." }
+liblaf-fem = { editable = true, path = "." }
 
 [tool.pixi.system-requirements]
 cuda = "12"

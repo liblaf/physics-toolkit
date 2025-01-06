@@ -2,10 +2,10 @@ import jax
 import jax.numpy as jnp
 from jaxtyping import Float
 
-import ptk.utils
+import fem.utils
 
 
-@ptk.utils.jit()
+@fem.utils.jit()
 def grad_op(points: Float[jax.Array, "4 3"]) -> Float[jax.Array, "3 4"]:
     grad: Float[jax.Array, "3 4"] = jnp.linalg.pinv(
         jnp.vstack(
