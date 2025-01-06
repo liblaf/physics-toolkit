@@ -7,6 +7,15 @@ repo_url: https://github.com/liblaf/fem
 site_author: liblaf
 edit_uri: edit/main/docs/
 
+extra_css:
+  - https://registry.npmmirror.com/katex/latest/files/dist/katex.min.css
+  - css/katex.css
+
+extra_javascript:
+  - javascript/katex.js
+  - https://registry.npmmirror.com/katex/latest/files/dist/katex.min.js
+  - https://registry.npmmirror.com/katex/latest/files/dist/contrib/auto-render.min.js
+
 theme:
   name: material
   features:
@@ -108,6 +117,8 @@ plugins:
 
 markdown_extensions:
   - mdx_truly_sane_lists
+  - pymdownx.arithmatex:
+      generic: true
 
 watch:
   - docs/

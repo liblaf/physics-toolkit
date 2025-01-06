@@ -1,0 +1,10 @@
+{
+  "Mathematical Ilatic Small Lambda 𝜆": {
+    "prefix": "lambda",
+    "body": ["𝜆"]
+  },
+  "Mathematical Italic Small Mu 𝜇": {
+    "prefix": "mu",
+    "body": ["𝜇"]
+  }
+}

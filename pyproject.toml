@@ -28,10 +28,13 @@ authors = [
   { email = "30631553+liblaf@users.noreply.github.com", name = "liblaf" },
 ]
 dependencies = [
+  "felupe~=9.1.0",
   "jaxtyping~=0.2.36",
   "lazy-loader~=0.4",
   "numpy~=2.2.1",
+  "pytetwild~=0.1.dev1",
   "pyvista~=0.44.2",
+  "rich~=13.9.4",
   "scipy~=1.15.0",
 ]
 description = "Add your description here"

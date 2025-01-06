@@ -1,3 +1,14 @@
-from . import element, utils
+from . import element, field, material, math, problem, region, utils
+from .region import Region, RegionTetra
 
-__all__ = ["element", "utils"]
+__all__ = [
+    "Region",
+    "RegionTetra",
+    "element",
+    "field",
+    "material",
+    "math",
+    "problem",
+    "region",
+    "utils",
+]

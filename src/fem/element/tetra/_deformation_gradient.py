@@ -9,10 +9,18 @@ import fem.utils
 def deformation_gradient(
     disp: Float[jax.Array, "4 3"], grad_op: Float[jax.Array, "3 4"]
 ) -> Float[jax.Array, "3 3"]:
-    """Compute the deformation gradient tensor for a tetrahedral element.
+    r"""Compute deformation gradient tensor for a tetrahedral element.
+
+    $$
+    \bm{F} = \bm{I} + \nabla\bm{u}
+    $$
+
+    Args:
+        disp: Nodal displacements.
+        grad_op: Gradient operator.
 
     References:
-        - https://en.wikipedia.org/wiki/Finite_strain_theory#Deformation_gradient_tensor
+        [1] <!-- --> [Finite strain theory - Wikipedia](https://en.wikipedia.org/wiki/Finite_strain_theory#Deformation_gradient_tensor)
     """
     grad: Float[jax.Array, "3 3"] = grad_op @ disp
     F: Float[jax.Array, "3 3"] = jnp.eye(3) + grad
