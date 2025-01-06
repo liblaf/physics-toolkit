@@ -20,7 +20,11 @@ def volume(points: Float[jax.Array, "4 3"]) -> Float[jax.Array, ""]:
     """
     volume: Float[jax.Array, ""] = (1.0 / 6.0) * jnp.linalg.det(
         jnp.vstack(
-            [points[0] - points[3], points[1] - points[3], points[2] - points[3]]
+            [
+                points[0] - points[3],
+                points[1] - points[3],
+                points[2] - points[3],
+            ]
         )
     )
     volume = jnp.abs(volume)

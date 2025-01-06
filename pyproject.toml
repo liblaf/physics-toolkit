@@ -45,9 +45,9 @@ version = "0.0.0"
 [project.urls]
 "Changelog" = "https://github.com/liblaf/fem/blob/main/CHANGELOG.md"
 "Homepage" = "https://github.com/liblaf/fem"
-"Issue Tracker" = "https://github.com/liblaf/fem/issues"
+"Issues" = "https://github.com/liblaf/fem/issues"
 "Release Notes" = "https://github.com/liblaf/fem/releases"
-"Source Code" = "https://github.com/liblaf/fem"
+"Repository" = "https://github.com/liblaf/fem"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/fem"]

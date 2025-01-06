@@ -19,9 +19,9 @@ def test_deformation_gradient() -> None:
 def deformation_gradient_naive(
     disp: Float[jax.Array, "4 3"], points: Float[jax.Array, "4 3"]
 ) -> Float[jax.Array, "3 3"]:
-    """https://en.wikipedia.org/wiki/Finite_strain_theory."""
+    """https://en.wikipedia.org/wiki/Finite_strain_theory#Deformation_gradient_tensor."""
     x: Float[jax.Array, "4 3"] = points + disp
-    dX: Float[jax.Array, "3 3"] = points[1:] - points[0]
-    dx: Float[jax.Array, "3 3"] = x[1:] - x[0]
+    dX: Float[jax.Array, "3 3"] = (points[1:] - points[0]).T
+    dx: Float[jax.Array, "3 3"] = (x[1:] - x[0]).T
     F: Float[jax.Array, "3 3"] = dx @ jnp.linalg.pinv(dX)
     return F
