@@ -3,12 +3,26 @@ import functools
 from collections.abc import Callable
 
 import jax
+import jax.numpy as jnp
+import numpy as np
 from jaxtyping import Bool, Float
 
 
 class Body(abc.ABC):
-    free_mask: Bool[jax.Array, " DoF"]
-    values: Float[jax.Array, " DoF"]
+    free_mask: Bool[np.ndarray, "*D"]
+    values: Float[jax.Array, "*D"]
+
+    def make_field(self, u: Float[jax.Array, " DoF"]) -> Float[jax.Array, "*D"]:
+        u: Float[jax.Array, "*D"] = self.values.at[self.free_mask].set(u)
+        return u
+
+    @functools.cached_property
+    def n_degrees(self) -> int:
+        return self.free_mask.size
+
+    @functools.cached_property
+    def n_dof(self) -> int:
+        return jnp.count_nonzero(self.free_mask).item()
 
     @functools.cached_property
     def fun(self) -> Callable[[Float[jax.Array, " DoF"]], Float[jax.Array, ""]]:
@@ -32,5 +46,9 @@ class Body(abc.ABC):
 
         return jax.jit(hessp)
 
+    def _fun(self, u: Float[jax.Array, " DoF"]) -> Float[jax.Array, ""]:
+        u: Float[jax.Array, "*D"] = self.make_field(u)
+        return self._energy(u)
+
     @abc.abstractmethod
-    def _fun(self, u: Float[jax.Array, " DoF"]) -> Float[jax.Array, " "]: ...
+    def _energy(self, u: Float[jax.Array, "*D"]) -> Float[jax.Array, ""]: ...
