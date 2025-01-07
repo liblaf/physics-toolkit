@@ -15,6 +15,7 @@ class BodyStableNeoHookean(fem.Body):
 
     lambda_: Float[jax.Array, " C"]
     mu: Float[jax.Array, " C"]
+    pre_strain: Float[jax.Array, " C"]
 
     def __init__(
         self,
@@ -23,12 +24,14 @@ class BodyStableNeoHookean(fem.Body):
         values: Float[npt.ArrayLike, "#D"] = 0.0,
         lambda_: Float[npt.ArrayLike, "#C"] = 1e4,
         mu: Float[npt.ArrayLike, "#C"] = 1e2,
+        pre_strain: Float[npt.ArrayLike, "#C"] = 1.0,
     ) -> None:
         self.mesh = mesh
         self.free_mask = np.broadcast_to(np.asarray(free_mask), (mesh.ndof,))
         self.values = jnp.broadcast_to(jnp.asarray(values), (mesh.ndof,))
         self.lambda_ = jnp.broadcast_to(jnp.asarray(lambda_), (self.n_cells,))
         self.mu = jnp.broadcast_to(jnp.asarray(mu), (self.n_cells,))
+        self.pre_strain = jnp.broadcast_to(jnp.asarray(pre_strain), (self.n_cells,))
 
     @property
     def n_points(self) -> int:
@@ -43,7 +46,7 @@ class BodyStableNeoHookean(fem.Body):
         u: Float[jax.Array, "C 4 3"] = u[self.mesh.cells]
         x: Float[jax.Array, "C 4 3"] = jnp.asarray(self.mesh.points[self.mesh.cells])
         W: Float[jax.Array, " C"] = jax.vmap(stable_neo_hookean)(
-            u, x, self.lambda_, self.mu
+            u, x, self.lambda_, self.mu, self.pre_strain
         )
         return jnp.sum(W)
 
@@ -53,13 +56,14 @@ def stable_neo_hookean(
     x: Float[jax.Array, "4 3"],
     lambda_: Float[jax.Array, ""],
     mu: Float[jax.Array, ""],
+    pre_strain: Float[jax.Array, ""],
 ) -> Float[jax.Array, ""]:
     λ: Float[jax.Array, ""] = lambda_
     μ: Float[jax.Array, ""] = mu
     α: Float[jax.Array, ""] = 1.0 + μ / λ - (μ / 4.0) * λ
     grad_op: Float[jax.Array, "3 4"] = fem.element.tetra.grad_op(x)
     grad: Float[jax.Array, "3 3"] = grad_op @ u
-    F: Float[jax.Array, "3 3"] = jnp.eye(3) + grad
+    F: Float[jax.Array, "3 3"] = jnp.eye(3) / pre_strain + grad
     J: Float[jax.Array, ""] = jnp.linalg.det(F)  # relative volume change
     C: Float[jax.Array, "3 3"] = F.T @ F
     I_C: Float[jax.Array, "3 3"] = jnp.trace(C)  # first invariant of C
